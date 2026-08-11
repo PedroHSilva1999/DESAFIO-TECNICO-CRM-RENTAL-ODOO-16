@@ -59,8 +59,8 @@ Depois faça login em http://localhost:8069 com **admin** / **admin**.
 ### Instalar módulos pela tela
 
 1. Abra http://localhost:8069/web?debug=1
-2. Vá a **Definições** (ou **Apps**) → **Atualizar lista de Apps**
-3. Remova o filtro "Apps" se necessário e procure `crm_rental` / `account_balancete_filter`
+2. Vá a **Apps** → **Atualizar lista de Apps (Update App List)**
+3. Remova o filtro "Apps" e procure `crm_rental` / `account_balancete_filter`
 4. Instale os módulos
 
 ### Instalar pela linha de comando
