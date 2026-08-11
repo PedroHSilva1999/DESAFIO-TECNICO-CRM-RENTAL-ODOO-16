@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="crm_rental_line_view_tree" model="ir.ui.view">
+        <field name="name">crm.rental.line.tree</field>
+        <field name="model">crm.rental.line</field>
+        <field name="arch" type="xml">
+        <tree string="Linhas" editable="bottom">
+            <field name="sequence" widget="handle"/>
+            <field name="currency_usd_id" invisible="1"/>
+            <field name="currency_kz_id" invisible="1"/>
+            <field name="product_id"/>
+            <field name="name"/>
+            <field name="operation_type"/>
+            <field name="quantity"/>
+            <field name="date_start" readonly="1" optional="hide"/>
+            <field name="date_end" readonly="1" optional="hide"/>
+            <field name="rental_days" readonly="1"/>
+            <field name="price_unit_usd" attrs="{'readonly': [('operation_type', '=', 'rental')]}"/>
+            <field name="price_unit_kz" readonly="1"/>
+            <field name="price_subtotal_usd" sum="Total USD"/>
+            <field name="price_subtotal_kz" sum="Total KZ"/>
+            <button name="action_open_rental_wizard" type="object" icon="fa-calendar"
+                    title="Definir periodo de aluguer"
+                    attrs="{'invisible': [('operation_type', '!=', 'rental')]}"/>
+        </tree>
+        </field>
+    </record>
+
+    <record id="crm_rental_line_view_form" model="ir.ui.view">
+        <field name="name">crm.rental.line.form</field>
+        <field name="model">crm.rental.line</field>
+        <field name="arch" type="xml">
+            <form string="Linha da Cotação">
+                <sheet>
+                <group>
+                    <group>
+                        <field name="currency_usd_id" invisible="1"/>
+                        <field name="currency_kz_id" invisible="1"/>
+                        <field name="product_id"/>
+                        <field name="name"/>
+                        <field name="operation_type"/>
+                        <field name="quantity"/>
+                        <field name="exchange_rate" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="date_start" readonly="1"/>
+                        <field name="date_end" readonly="1"/>
+                        <field name="rental_days" readonly="1"/>
+                        <button name="action_open_rental_wizard" type="object" string="Definir Periodo"
+                                class="btn-secondary"
+                                attrs="{'invisible': [('operation_type', '!=', 'rental')]}"/>
+                    </group>
+                    <group string="USD">
+                        <field name="price_unit_usd"/>
+                        <field name="price_subtotal_usd"/>
+                    </group>
+                    <group string="KZ">
+                        <field name="price_unit_kz" readonly="1"/>
+                        <field name="price_subtotal_kz"/>
+                    </group>
+                </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

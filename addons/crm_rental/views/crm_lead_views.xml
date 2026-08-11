@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="crm_lead_view_form_rental" model="ir.ui.view">
+        <field name="name">crm.lead.form.rental</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+            <page string="Cotação" name="rental_quotation">
+                <group>
+                    <group>
+                        <field name="operation_type"/>
+                        <field name="pricelist_id" options="{'no_create': True}"/>
+                    </group>
+                    <group>
+                        <field name="exchange_rate"/>
+                        <field name="currency_usd_id" invisible="1"/>
+                        <field name="currency_kz_id" invisible="1"/>
+                    </group>
+                </group>
+                <div class="mb-2">
+                    <button name="action_add_rental_line" type="object" class="btn-secondary"
+                            icon="fa-calendar" string="Adicionar Aluguer"/>
+                </div>
+                <field name="rental_line_ids"/>
+                <group class="oe_subtotal_footer oe_right">
+                    <field name="amount_total_usd"/>
+                    <field name="amount_total_kz"/>
+                </group>
+            </page>
+            </notebook>
+        </field>
+    </record>
+
+    <record id="view_crm_case_opportunities_filter_rental" model="ir.ui.view">
+        <field name="name">crm.lead.search.rental</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter"/>
+        <field name="arch" type="xml">
+        <filter name="assigned_to_me" position="before">
+            <filter string="Em Atraso" name="rental_overdue"
+                    domain="[('date_deadline', '&lt;', context_today().strftime('%Y-%m-%d')), ('probability', '&lt;', 100)]"/>
+            <separator/>
+        </filter>
+        <group position="inside">
+            <filter string="Tipo de Operação" name="group_operation_type" context="{'group_by': 'operation_type'}"/>
+        </group>
+        </field>
+    </record>
+
+    <record id="crm_lead_view_tree_rental" model="ir.ui.view">
+        <field name="name">crm.lead.tree.rental</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+        <field name="arch" type="xml">
+        <field name="expected_revenue" position="after">
+            <field name="currency_usd_id" invisible="1"/>
+            <field name="currency_kz_id" invisible="1"/>
+            <field name="amount_total_usd" sum="Total USD" optional="show"/>
+            <field name="amount_total_kz" sum="Total KZ" optional="show"/>
+        </field>
+    </field>
+    </record>
+    <record id="crm_lead_view_pivot_rental" model="ir.ui.view">
+        <field name="name">crm.lead.pivot.rental</field>
+        <field name="model">crm.lead</field>
+        <field name="arch" type="xml">
+            <pivot string="Forecast" sample="1">
+            <field name="partner_id" type="row"/>
+            <field name="amount_total_usd" type="measure"/>
+            <field name="amount_total_kz" type="measure"/>
+            <field name="forecast_usd" type="measure"/>
+            <field name="forecast_kz" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="crm_lead_view_graph_rental" model="ir.ui.view">
+        <field name="name">crm.lead.graph.rental</field>
+        <field name="model">crm.lead</field>
+        <field name="arch" type="xml">
+            <graph string="Forecast" type="bar" sample="1">
+                <field name="date_deadline" interval="month"/>
+                <field name="amount_total_usd" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="crm_rental_forecast_action" model="ir.actions.act_window">
+        <field name="name">Forecast Aluguer / Venda</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">pivot,graph,tree,form</field>
+        <field name="domain">[('type', '=', 'opportunity')]</field>
+        <field name="context">{'default_type': 'opportunity'}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Ainda nao existem oportunidades cotadas
+            </p>
+        </field>
+    </record>
+    <record id="crm_rental_forecast_action_pivot" model="ir.actions.act_window.view">
+        <field name="sequence">1</field>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="crm_lead_view_pivot_rental"/>
+        <field name="act_window_id" ref="crm_rental_forecast_action"/>
+    </record>
+
+    <record id="crm_rental_forecast_action_graph" model="ir.actions.act_window.view">
+        <field name="sequence">2</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="crm_lead_view_graph_rental"/>
+        <field name="act_window_id" ref="crm_rental_forecast_action"/>
+    </record>
+
+    <menuitem id="crm_rental_forecast_menu"
+              name="Forecast Aluguer / Venda"
+              parent="crm.crm_menu_report"
+              action="crm_rental_forecast_action"
+              sequence="10"/>
+
+</odoo>
