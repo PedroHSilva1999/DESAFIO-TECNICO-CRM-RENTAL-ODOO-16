@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_account_move_line_filter_balancete" model="ir.ui.view">
+        <field name="name">account.move.line.search.balancete</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_account_move_line_filter"/>
+        <field name="arch" type="xml">
+            <field name="account_id" position="after">
+                <field name="debit" string="Debito" filter_domain="[('debit', '=', self)]"/>
+                <field name="credit" string="Credito" filter_domain="[('credit', '=', self)]"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="account_balancete_view_tree" model="ir.ui.view">
+        <field name="name">account.move.line.balancete.tree</field>
+        <field name="model">account.move.line</field>
+        <field name="arch" type="xml">
+            <tree string="Balancete" create="false" edit="false" delete="false" default_order="account_id, date">
+                <field name="company_currency_id" invisible="1"/>
+                <field name="date"/>
+                <field name="move_id"/>
+                <field name="account_id"/>
+                <field name="partner_id" optional="show"/>
+                <field name="name"/>
+                <field name="journal_id" optional="hide"/>
+                <field name="debit" sum="Total Debito"/>
+                <field name="credit" sum="Total Credito"/>
+                <field name="balance" sum="Saldo"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="account_balancete_view_search" model="ir.ui.view">
+        <field name="name">account.move.line.balancete.search</field>
+        <field name="model">account.move.line</field>
+        <field name="arch" type="xml">
+            <search string="Balancete">
+                <field name="account_id"/>
+                <field name="partner_id"/>
+                <field name="move_id" string="Lancamento"/>
+                <field name="debit" string="Debito" filter_domain="[('debit', '=', self)]"/>
+                <field name="credit" string="Credito" filter_domain="[('credit', '=', self)]"/>
+                <separator/>
+                <filter string="Lancado" name="posted" domain="[('parent_state', '=', 'posted')]"/>
+                <filter string="Rascunho" name="unposted" domain="[('parent_state', '=', 'draft')]"/>
+                <separator/>
+                <filter string="Data" name="date" date="date"/>
+                <group expand="1" string="Agrupar Por">
+                    <filter string="Conta" name="group_account" context="{'group_by': 'account_id'}"/>
+                    <filter string="Diario" name="group_journal" context="{'group_by': 'journal_id'}"/>
+                    <filter string="Parceiro" name="group_partner" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Mes" name="group_date" context="{'group_by': 'date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="account_balancete_action" model="ir.actions.act_window">
+        <field name="name">Balancete</field>
+        <field name="res_model">account.move.line</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="account_balancete_view_tree"/>
+        <field name="search_view_id" ref="account_balancete_view_search"/>
+        <field name="domain">[('display_type', 'not in', ('line_section', 'line_note'))]</field>
+        <field name="context">{'search_default_group_account': 1, 'search_default_posted': 1}</field>
+    </record>
+
+    <menuitem id="account_balancete_menu"
+              name="Balancete"
+              parent="account.menu_finance_reports"
+              action="account_balancete_action"
+              sequence="15"/>
+
+</odoo>
