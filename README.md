@@ -18,7 +18,7 @@ git clone https://github.com/PedroHSilva1999/DESAFIO-TECNICO-CRM-RENTAL-ODOO-16.
 cd DESAFIO-TECNICO-CRM-RENTAL-ODOO-16
 ```
 
-## Docker
+## Docker (OPCIONAL)
 
 Se ainda não tiver Docker instalado, baixe (descarregue) o [Docker Desktop](https://www.docker.com/products/docker-desktop/) (Windows/macOS) ou no Linux:
 
