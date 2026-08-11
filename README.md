@@ -63,7 +63,7 @@ Depois faça login em http://localhost:8069 com **admin** / **admin**.
 3. Remova o filtro "Apps" e procure `crm_rental` / `account_balancete_filter`
 4. Instale os módulos
 
-### Instalar pela linha de comando
+### Instalar pela linha de comando (OPCIONAL)
 
 ```bash
 docker compose stop odoo
