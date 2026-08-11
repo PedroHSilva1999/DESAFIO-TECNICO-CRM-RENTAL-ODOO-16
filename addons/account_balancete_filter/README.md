@@ -36,15 +36,11 @@ docker compose start odoo
 
 ### CRM Rental (`crm_rental`)
 
-#### Preparar produtos e lista de preços (Opcional)
+#### Câmbio, dashboard e cron
 
-Só é necessário se não estiver a usar os **dados de demonstração** do módulo:
-
-1. Crie/abra um produto de **serviço** (venda) e outro com a opção **Pode ser Alugado** activa (aluguer).
-2. Crie uma **lista de preços em USD** com preços fixos para esses produtos.
-3. Associe essa lista de preços ao **cliente**.
-
-Para carregar a demo ao criar a base, use `without_demo = False` no `config/odoo/odoo.conf` (Opcional).
+- **Câmbio:** CRM > Configuração > Taxas de Câmbio (USD/KZ). Taxa inicial `1 USD = 990 KZ`. Usa-se a última taxa com data ≤ à data da cotação.
+- **Dashboard:** CRM > Relatórios > Forecast Aluguer / Venda (pivot, gráfico e lista) — totais USD/KZ, forecast por probabilidade, clientes com mais oportunidades.
+- **Cron:** semanalmente notifica oportunidades em atraso (actividade "A Fazer" + nota no chatter), sem duplicados.
 
 #### Cotar uma venda (serviço)
 
@@ -67,11 +63,15 @@ Para carregar a demo ao criar a base, use `without_demo = False` no `config/odoo
 4. Após confirmar, esses valores passam a ser o preço unitário da linha; subtotais = `Qty × preço unitário` em USD e KZ.
 5. Se escolher um produto de aluguer directamente na grelha (sem wizard), o sistema avisa para usar o ícone de calendário / botão **Periodo** da linha (ou **Adicionar Aluguer**).
 
-#### Câmbio, dashboard e cron
+#### Preparar produtos e lista de preços (Opcional)
 
-- **Câmbio:** CRM > Configuração > Taxas de Câmbio (USD/KZ). Taxa inicial `1 USD = 990 KZ`. Usa-se a última taxa com data ≤ à data da cotação.
-- **Dashboard:** CRM > Relatórios > Forecast Aluguer / Venda (pivot, gráfico e lista) — totais USD/KZ, forecast por probabilidade, clientes com mais oportunidades.
-- **Cron:** semanalmente notifica oportunidades em atraso (actividade "A Fazer" + nota no chatter), sem duplicados.
+Só é necessário se não estiver a usar os **dados de demonstração** do módulo:
+
+1. Crie/abra um produto de **serviço** (venda) e outro com a opção **Pode ser Alugado** activa (aluguer).
+2. Crie uma **lista de preços em USD** com preços fixos para esses produtos.
+3. Associe essa lista de preços ao **cliente**.
+
+Para carregar a demo ao criar a base, use `without_demo = False` no `config/odoo/odoo.conf` (Opcional).
 
 #### Instruções para testes
 
