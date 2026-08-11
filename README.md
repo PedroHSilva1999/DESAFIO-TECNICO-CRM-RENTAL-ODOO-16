@@ -32,7 +32,7 @@ sudo apt update && sudo apt install -y docker.io docker-compose-plugin
 docker compose up -d
 ```
 
-## IMPORTANTE: O projeto pode demorar um pouco pra subir aguarde entre 5 e 10 minutos.
+## IMPORTANTE: O projeto pode levar alguns minutos para iniciar. Aguarde de 5 a 10 minutos, mesmo que todas as dependências já estejam instaladas no Docker.
 
 Aceder em http://localhost:8069 (ou http://localhost via Nginx).
 
