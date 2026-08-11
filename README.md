@@ -44,7 +44,7 @@ Aceder em http://localhost:8069 (ou http://localhost via Nginx).
 - Password: `admin`
 
 Na primeira vez, se a base ainda não existir, crie com esses dados no formulário (Email `admin`, Password `admin`)  
-ou rode o script de inicialização:
+ou rode o script de inicialização (opcional) já vem com "admin" por padrão no Email e Password:
 
 ```bash
 # Linux / macOS
