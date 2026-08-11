@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="crm_rental_pricelist_usd" model="product.pricelist">
+            <field name="name">Lista de Precos USD</field>
+            <field name="currency_id" ref="base.USD"/>
+        </record>
+        <record id="crm_rental_product_escavadora" model="product.product">
+            <field name="name">Escavadora Giratoria 20T</field>
+            <field name="detailed_type">consu</field>
+            <field name="rental_ok" eval="True"/>
+            <field name="list_price">150.0</field>
+        </record>
+
+        <record id="crm_rental_product_gerador" model="product.product">
+            <field name="name">Gerador 100 KVA</field>
+            <field name="detailed_type">consu</field>
+            <field name="rental_ok" eval="True"/>
+            <field name="list_price">85.0</field>
+        </record>
+        <record id="crm_rental_product_consultoria" model="product.product">
+            <field name="name">Consultoria Tecnica</field>
+            <field name="detailed_type">service</field>
+            <field name="list_price">80.0</field>
+        </record>
+
+        <record id="crm_rental_pricelist_item_escavadora" model="product.pricelist.item">
+            <field name="pricelist_id" ref="crm_rental_pricelist_usd"/>
+            <field name="applied_on">0_product_variant</field>
+            <field name="product_id" ref="crm_rental_product_escavadora"/>
+            <field name="compute_price">fixed</field>
+            <field name="fixed_price">150.0</field>
+        </record>
+
+        <record id="crm_rental_pricelist_item_gerador" model="product.pricelist.item">
+            <field name="pricelist_id" ref="crm_rental_pricelist_usd"/>
+            <field name="applied_on">0_product_variant</field>
+            <field name="product_id" ref="crm_rental_product_gerador"/>
+            <field name="compute_price">fixed</field>
+            <field name="fixed_price">85.0</field>
+        </record>
+        <record id="crm_rental_pricelist_item_consultoria" model="product.pricelist.item">
+            <field name="pricelist_id" ref="crm_rental_pricelist_usd"/>
+            <field name="applied_on">0_product_variant</field>
+            <field name="product_id" ref="crm_rental_product_consultoria"/>
+            <field name="compute_price">fixed</field>
+            <field name="fixed_price">80.0</field>
+        </record>
+
+        <record id="crm_rental_partner_construtora" model="res.partner">
+            <field name="name">Construtora Talatona, Lda</field>
+            <field name="is_company" eval="True"/>
+            <field name="city">Luanda</field>
+            <field name="property_product_pricelist" ref="crm_rental_pricelist_usd"/>
+        </record>
+
+        <record id="crm_rental_partner_mineira" model="res.partner">
+            <field name="name">Mineira do Cuango, SA</field>
+            <field name="is_company" eval="True"/>
+            <field name="city">Luanda</field>
+            <field name="property_product_pricelist" ref="crm_rental_pricelist_usd"/>
+        </record>
+
+        <record id="crm_rental_lead_obra" model="crm.lead">
+            <field name="name">Aluguer de equipamento - Obra Talatona</field>
+            <field name="type">opportunity</field>
+            <field name="partner_id" ref="crm_rental_partner_construtora"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="pricelist_id" ref="crm_rental_pricelist_usd"/>
+            <field name="operation_type">rental</field>
+            <field name="probability">60</field>
+            <field name="date_deadline" eval="(datetime.date.today() + relativedelta(days=20)).strftime('%Y-%m-%d')"/>
+        </record>
+
+        <record id="crm_rental_line_obra_escavadora" model="crm.rental.line">
+            <field name="lead_id" ref="crm_rental_lead_obra"/>
+            <field name="product_id" ref="crm_rental_product_escavadora"/>
+            <field name="name">Escavadora Giratoria 20T</field>
+            <field name="operation_type">rental</field>
+            <field name="quantity">2</field>
+            <field name="date_start" eval="datetime.date.today().strftime('%Y-%m-%d')"/>
+            <field name="date_end" eval="(datetime.date.today() + relativedelta(days=9)).strftime('%Y-%m-%d')"/>
+            <field name="rental_days">10</field>
+            <field name="exchange_rate">990.0</field>
+            <field name="price_unit_usd">1500.0</field>
+            <field name="price_unit_kz">1485000.0</field>
+        </record>
+
+        <record id="crm_rental_lead_consultoria" model="crm.lead">
+            <field name="name">Consultoria tecnica - Mineira do Cuango</field>
+            <field name="type">opportunity</field>
+            <field name="partner_id" ref="crm_rental_partner_mineira"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="pricelist_id" ref="crm_rental_pricelist_usd"/>
+            <field name="operation_type">sale</field>
+            <field name="probability">30</field>
+            <field name="date_deadline" eval="(datetime.date.today() - relativedelta(days=15)).strftime('%Y-%m-%d')"/>
+        </record>
+
+        <record id="crm_rental_line_consultoria" model="crm.rental.line">
+            <field name="lead_id" ref="crm_rental_lead_consultoria"/>
+            <field name="product_id" ref="crm_rental_product_consultoria"/>
+            <field name="name">Consultoria Tecnica</field>
+            <field name="operation_type">sale</field>
+            <field name="quantity">5</field>
+            <field name="exchange_rate">990.0</field>
+            <field name="price_unit_usd">80.0</field>
+            <field name="price_unit_kz">79200.0</field>
+        </record>
+
+    </data>
+</odoo>
