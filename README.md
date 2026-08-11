@@ -28,6 +28,8 @@ sudo apt update && sudo apt install -y docker.io docker-compose-plugin
 
 ## Subir o projeto
 
+## IMPORTANTE: O projeto pode demorar um pouco pra subir aguarde entre 5 e 10 minutos.
+
 ```bash
 docker compose up -d
 ```
