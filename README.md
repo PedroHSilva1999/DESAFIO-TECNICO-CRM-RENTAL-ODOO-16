@@ -149,7 +149,7 @@ O job **CRM Rental: notificar oportunidades em atraso** corre **semanalmente** e
 | 4 | **Aluguer / wizard** | Ícone de calendário / *Definir Periodo* na linha (ou *Adicionar Aluguer*) → produto, datas início/fim → confirmar. | Dias inclusivos; Total USD = dias × preço da lista; conversão KZ; subtotais e totais correctos. |
 | 5 | **Aviso na grelha** | Escolher produto de aluguer directamente na grelha (sem wizard). | Sistema avisa que o valor deve ser calculado no wizard. |
 | 6 | **Dashboard / forecast** | CRM > Relatórios > Forecast Aluguer / Venda; agrupar por cliente. | Contagem, receita USD/KZ e forecast ponderado batem certo com as oportunidades. |
-| 7 | **Cron em atraso** | Colocar `date_deadline` no passado. Executar a acção planeada em *Definições > Técnico > Acções Automatizadas > Acções Planeadas*. | Actividade "A Fazer" + nota no chatter; sem duplicados se voltar a correr. |
+| 7 | **Cron em atraso** | Colocar `date_deadline` no passado. Executar a acção planeada em *Definições (Settings) > Técnico (Technical) > Acções Planejadas (Schedules Actions) *. | Actividade "A Fazer" + nota no chatter; sem duplicados se voltar a correr. |
 
 ### Modelos (referência técnica)
 
