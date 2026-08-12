@@ -113,7 +113,8 @@ Só é necessário se não estiver a usar os **dados de demonstração** do mód
 ### Cotar um aluguer (rental)
 
 1. Na oportunidade, use um destes atalhos para abrir o wizard:
-   - **Ícone de calendário / Período** — na própria linha da cotação: ícone de calendário na grelha, ou o botão **Definir Periodo** se abrir o formulário da linha. Serve para (re)definir as datas e recalcular o valor.
+   - **Ícone de calendário / Período** — na própria linha da cotação: ícone de calendário na linha (grelha), ou o botão **Definir Periodo** se abrir o formulário da linha. Serve para (re)definir as datas e recalcular o valor.
+   - <img width="1531" height="674" alt="image" src="https://github.com/user-attachments/assets/02fd3af1-5838-4fc1-bd80-d9d2c7b4fe9c" />
    - **Adicionar Aluguer** — no separador **Cotação** da oportunidade (botão com ícone de calendário no topo). Cria uma linha nova com datas e valor.
 2. No wizard, escolha produto (com **Pode ser Alugado**), quantidade e datas de início/fim.
 3. O sistema calcula o nº de dias de forma inclusiva (`fim - início + 1`), `Total USD = dias × preço da lista`, e converte para KZ.
