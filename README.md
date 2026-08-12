@@ -119,7 +119,7 @@ Só é necessário se não estiver a usar os **dados de demonstração** do mód
 2. No wizard, escolha produto (com **Pode ser Alugado**), quantidade e datas de início/fim.
 3. O sistema calcula o nº de dias de forma inclusiva (`fim - início + 1`), `Total USD = dias × preço da lista`, e converte para KZ.
 4. Após confirmar, esses valores passam a ser o preço unitário da linha; subtotais = `Qty × preço unitário` em USD e KZ.
-5. Se escolher um produto de aluguer directamente na grelha (sem wizard), o sistema avisa para usar o ícone de calendário / botão **Periodo** da linha (ou **Adicionar Aluguer**).
+5. Se escolher um produto de aluguer directamente na linha( grelha) (sem wizard), o sistema avisa para usar o ícone de calendário / botão **Periodo** da linha (ou **Adicionar Aluguer**).
 
 ### Dashboard e forecast
 
