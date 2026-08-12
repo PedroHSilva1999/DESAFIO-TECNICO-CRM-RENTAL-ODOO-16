@@ -26,7 +26,7 @@ Se ainda não tiver Docker instalado, baixe (descarregue) o [Docker Desktop](htt
 sudo apt update && sudo apt install -y docker.io docker-compose-plugin
 ```
 
-## Subir o projeto
+## Subir o projeto (Aviso: O projeto pode levar alguns minutos para iniciar. Aguarde de 5 a 10 minutos, mesmo que todas as dependências já estejam instaladas no Docker.)
 
 ```bash
 docker compose up -d
